@@ -7,8 +7,9 @@
     
     <h3 class='h3'>Update a note</h3>
     <div class="text-center d-flex justify-content-center">
-        <form action="{{route('note.store')}}" method='post' class='w-50 text-start'>
+        <form action="{{route('note.update', $note->id)}}" method='post' class='w-50 text-start'>
 
+            @method('POST')
             @csrf
 
             <div class="mb-2">

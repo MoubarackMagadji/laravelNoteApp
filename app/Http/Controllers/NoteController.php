@@ -42,5 +42,23 @@ class NoteController extends Controller
 
         return view('notes.edit', ['note'=>$note]);
     }
+
+    public function update(Notes $note,Request $request){
+        // dd($note->id);
+
+        
+        $formData = $request->validate([
+            'title' => ['required'],
+            'description' => 'required'
+        ]);
+
+        if($request->has('completed')){
+            $formData['completed'] = 1;
+        }
+
+        $note->update($formData);
+
+        return redirect( route('note', $note->id ))->with('success','Note updated');
+    }
     
 }
