@@ -31,6 +31,8 @@ Route::get('/note/create', function(){
     return view('notes.create');
 })->name('note.create');
 
+Route::get('note/edit/{note}', [NoteController::class, 'edit'])->name('note.edit');
+
 Route::get('/note/{note}', [NoteController::class,'show'])->name('note');
 
 

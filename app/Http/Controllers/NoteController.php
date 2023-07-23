@@ -34,5 +34,13 @@ class NoteController extends Controller
 
         return view('notes.show', ['note'=> $note]);
     }
+
+
+    public function edit(Notes $note){
+
+        $note = $note;
+
+        return view('notes.edit', ['note'=>$note]);
+    }
     
 }

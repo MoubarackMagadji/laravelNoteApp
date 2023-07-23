@@ -16,7 +16,7 @@
     </div>
 
     <div class="p-5 d-flex justify-content-center">
-        <button class="btn btn-primary btn-sm px-3 me-3">Edit</button>
+        <a href=' {{ route('note.edit', ['note'=> $note->id]) }}'><button class="btn btn-primary btn-sm px-3 me-3">Edit</button></a>
         <form action="">
             <button class="btn btn-sm btn-danger">Delete</button>
         </form>
