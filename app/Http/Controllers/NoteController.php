@@ -11,18 +11,14 @@ class NoteController extends Controller
 
     public function index(){
 
-        
-
         if(request()->query('search')){
             $query = request()->query('search');
             
-            $notes = Notes::where('title',$query)->simplePaginate(3);
+            $notes = Notes::where('title','LIKE',"%$query%")->orderBy('id','desc')->simplePaginate(3);
 
         }else{
-            $notes = Notes::simplePaginate(3);
+            $notes = Notes::orderBy('id', 'desc')->simplePaginate(3);
         }
-
-        
 
         return view('notes.index')->with('notes', $notes);
     }
