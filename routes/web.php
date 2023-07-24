@@ -32,7 +32,9 @@ Route::get('/note/create', function(){
 })->name('note.create');
 
 Route::get('note/edit/{note}', [NoteController::class, 'edit'])->name('note.edit');
+Route::get('note/delete/{note}', [NoteController::class, 'destroy'])->name('note.delete');
 Route::post('note/{note}', [NoteController::class, 'update'])->name('note.update');
+Route::get('note/complete/{note}', [NoteController::class, 'complete']);
 
 Route::get('/note/{note}', [NoteController::class,'show'])->name('note');
 

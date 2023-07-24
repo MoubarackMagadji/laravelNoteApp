@@ -3,7 +3,7 @@
 @section('section')
     
     <button class="btn btn-sm btn-secondary mb-4  ">
-        <a class='text-decoration-none text-white' href=" {{ url()->previous() }}">Back</a>
+        <a class='text-decoration-none text-white' href=" {{ url('/notes') }}">Back</a>
     </button>
     <div class="bg-secondary p-3">
         <div class="d-flex justify-content-between mb-3">
@@ -16,9 +16,14 @@
     </div>
 
     <div class="p-5 d-flex justify-content-center">
-        <a href=' {{ route('note.edit', ['note'=> $note->id]) }}'><button class="btn btn-primary btn-sm px-3 me-3">Edit</button></a>
-        <form action="">
-            <button class="btn btn-sm btn-danger">Delete</button>
-        </form>
+
+        @if (!$note->completed)
+            <a href='/note/complete/{{ $note->id }}'> <button class="btn btn-warning btn-sm me-1">Complete</span></button>   
+        @endif
+         
+        <a href=' {{ route('note.edit', ['note'=> $note->id]) }}'><button class="btn btn-primary btn-sm px-3 me-1">Edit</button></a>
+        
+        <a href=' {{ route('note.delete', ['note'=> $note->id]) }}'><button class="btn btn-danger btn-sm px-3">Delete</button></a>
+        
     </div>
 @endsection

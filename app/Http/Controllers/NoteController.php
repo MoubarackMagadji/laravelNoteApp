@@ -54,11 +54,29 @@ class NoteController extends Controller
 
         if($request->has('completed')){
             $formData['completed'] = 1;
+        }else{
+            $formData['completed'] = 0;
         }
 
         $note->update($formData);
 
         return redirect( route('note', $note->id ))->with('success','Note updated');
+    }
+
+    public function destroy(Notes $note){
+        // dd($note);
+
+        $note->delete();
+
+        return redirect( route('notes'))->with('success','Note deleted successfully');
+    }
+
+    public function complete(Notes $note){
+        $note->completed = true;
+
+        $note->update();
+
+        return redirect()->back()->with('success', 'Note updated successfully');
     }
     
 }

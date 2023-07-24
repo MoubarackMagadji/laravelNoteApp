@@ -32,8 +32,8 @@
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" name='completed' type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
+                <input class="form-check-input" name='completed' type="checkbox" {{ ($note->completed ? 'checked' :'')}} id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault" >
                   Default checkbox
                 </label>
             </div>

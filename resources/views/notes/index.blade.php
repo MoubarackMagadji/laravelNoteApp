@@ -10,7 +10,15 @@
         @foreach ($notes as $note)
             <div class='py-3 border-bottom border-secondary d-flex justify-content-between'>
                 <span> {{ $note->title }} </span>
-                <a href="/note/{{ $note->id }}"><button class='btn btn-primary btn-sm'> View </button></a>
+                <span>
+                    @if ($note->completed)
+                        <button class="btn btn-dark btn-sm me-1">Completed</span>
+                    @else
+                       <a href='/note/complete/{{ $note->id }}'> <button class="btn btn-warning btn-sm me-1">Complete</span></button>
+                    @endif
+                    
+                    <a href="/note/{{ $note->id }}"><button class='btn btn-primary btn-sm'> View </button></a>
+                </span>
             </div>
         @endforeach
     </div>
