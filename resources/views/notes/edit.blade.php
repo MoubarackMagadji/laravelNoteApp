@@ -5,6 +5,11 @@
 
     
     
+    
+    <div class="d-flex ">
+        
+    </div>
+    <a href='{{ url()->previous()}}'> <button class='btn btn-secondary btn-sm float-start'>Back</button> </a>
     <h3 class='h3'>Update a note</h3>
     <div class="text-center d-flex justify-content-center">
         <form action="{{route('note.update', $note->id)}}" method='post' class='w-50 text-start'>

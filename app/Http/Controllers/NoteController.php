@@ -9,6 +9,25 @@ use Illuminate\Http\Request;
 class NoteController extends Controller
 {
 
+    public function index(){
+
+        
+
+        if(request()->query('search')){
+            $query = request()->query('search');
+            
+            $notes = Notes::where('title',$query)->simplePaginate(3);
+
+        }else{
+            $notes = Notes::simplePaginate(3);
+        }
+
+        
+
+        return view('notes.index')->with('notes', $notes);
+    }
+
+
     public function store(Request $request){
         // dd($request->request);
 

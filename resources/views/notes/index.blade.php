@@ -1,11 +1,26 @@
 @extends('Layouts.layout')
 
 @section('section')
+
     <a href="{{ route('note.create')}}"><button>Create a note</button></a>
 
     <h2 class="h2 mt-5">Your notes</h2>
 
-    
+    <div class='d-flex  justify-content-end'>
+        <form >
+
+            <input 
+                type="search" 
+                name='search' 
+                value="{{ request()->query('search') }}"
+                class="form-control-inline " 
+                placeholder="Search here">
+            <input type="submit" class='btn btn-sm btn-primary' value="Search">
+        </form>
+    </div>
+
+@unless(!$notes->count() > 0)
+
     <div class="text-start">
         @foreach ($notes as $note)
             <div class='py-3 border-bottom border-secondary d-flex justify-content-between'>
@@ -14,7 +29,7 @@
                     @if ($note->completed)
                         <button class="btn btn-dark btn-sm me-1">Completed</span>
                     @else
-                       <a href='/note/complete/{{ $note->id }}'> <button class="btn btn-warning btn-sm me-1">Complete</span></button>
+                    <a href='/note/complete/{{ $note->id }}'> <button class="btn btn-warning btn-sm me-1">Complete</span></button>
                     @endif
                     
                     <a href="/note/{{ $note->id }}"><button class='btn btn-primary btn-sm'> View </button></a>
@@ -24,7 +39,7 @@
     </div>
 
 
-
+    
     <div class='mb-5 mt-5 '>
         @if ($notes->hasPages())
             <nav>
@@ -36,14 +51,14 @@
                         </li>
                     @else
                         <li class="page-item">
-                            <a class="page-link" href="{{ $notes->previousPageUrl() }}" rel="prev">@lang('pagination.previous')</a>
+                            <a class="page-link" href="{{ $notes->appends(['search'=>request()->query('search')])->previousPageUrl() }}" rel="prev">@lang('pagination.previous')</a>
                         </li>
                     @endif
 
                     {{-- Next Page Link --}}
                     @if ($notes->hasMorePages())
                         <li class="page-item">
-                            <a class="page-link" href="{{ $notes->nextPageUrl() }}" rel="next">@lang('pagination.next')</a>
+                            <a class="page-link" href="{{ $notes->appends(['search'=>request()->query('search')])->nextPageUrl() }}" rel="next">@lang('pagination.next')</a>
                         </li>
                     @else
                         <li class="page-item disabled" aria-disabled="true">
@@ -53,6 +68,15 @@
                 </ul>
             </nav>
         @endif
+    </div> 
+    
+    
+@else
+    <div>
+        <span class="text-danger fw-bold">No Notes. Kindly create one.</span>
     </div>
+@endunless
+    
+    
 
 @endsection

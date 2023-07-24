@@ -19,26 +19,20 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/notes', function(){
-
-    $notes = Notes::simplePaginate(3);
-
-    return view('notes.index')->with('notes', $notes);
-
-})->name('notes');
-
+Route::get('/notes', [NoteController::class, 'index'])->name('notes');
 Route::get('/note/create', function(){
     return view('notes.create');
 })->name('note.create');
 
 Route::get('note/edit/{note}', [NoteController::class, 'edit'])->name('note.edit');
 Route::get('note/delete/{note}', [NoteController::class, 'destroy'])->name('note.delete');
-Route::post('note/{note}', [NoteController::class, 'update'])->name('note.update');
+Route::post('note/update/{note}', [NoteController::class, 'update'])->name('note.update');
+Route::post('/note/store', [NoteController::class,'store'])->name('note.store');
 Route::get('note/complete/{note}', [NoteController::class, 'complete']);
 
 Route::get('/note/{note}', [NoteController::class,'show'])->name('note');
 
 
 
-Route::post('/note/store', [NoteController::class,'store'])->name('note.store');
+
 
